@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.asiainfo.mapper.UserMapper"> <!-- 明明空间的值是Mapper接口类的全限定名，即MyBatis是通过读取该xml的namespace值来找到的UserMapper.class，所以mapper.xml和mapper.java的文件名可以不一致 -->
+	<select id="queryUserById" parameterType="int" resultType="User">
+		select user_id userId,user_name userName from t_user where user_id=#{id}
+	</select>
+	
+	<insert id="saveUser" parameterType="User">
+		insert into t_user (user_name) values (#{userName})
+	</insert>
+	
+	
+</mapper>
