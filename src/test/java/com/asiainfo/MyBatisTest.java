@@ -2,6 +2,9 @@ package com.asiainfo;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -9,8 +12,11 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
+import com.asiainfo.entity.QueryUserParam;
 import com.asiainfo.entity.User;
+import com.asiainfo.enums.LockEnum;
 import com.asiainfo.mapper.UserMapper;
+import com.asiainfo.util.SqlSessionFactoryDecodeUtil;
 import com.asiainfo.util.SqlSessionFactoryUtil;
 
 /**
@@ -55,17 +61,75 @@ public class MyBatisTest {
 	public void test2() {
 		SqlSession sqlSession = null;
 		try {
-			sqlSession = SqlSessionFactoryUtil.getSqlSession();
+			sqlSession = SqlSessionFactoryDecodeUtil.getSqlSession();
+			
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-			User user = userMapper.queryUserById(2);
-			System.out.println(user);
+//			User user = userMapper.queryUserById(18);
+//			System.out.println(user);
 			
 			User u = new User();
-			u.setUserName("aaa");
-			userMapper.saveUser(u);
+			u.setUserId(421);
+			u.setUserName("g");
+//			u.setLocked((byte)1);
+//			System.out.println("u1=" + u);
+//			int result = userMapper.saveUser(u);
+//			sqlSession.commit();
+//			System.out.println("u2=" + u);
+//			System.out.println("result=" + result);
+			
+//			int result = userMapper.updateById(u);
+			int result = userMapper.deleteById(421);
 			sqlSession.commit();
+			System.out.println("result=" + result);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+	
+	@Test
+	public void test3() {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = SqlSessionFactoryDecodeUtil.getSqlSession();
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			List<User> userList = userMapper.queryUserByName("aaa");
+			System.out.println(userList.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+	
+	@Test
+	public void test4() {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = SqlSessionFactoryDecodeUtil.getSqlSession();
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+//			Map map = new HashMap();
+//			map.put("id", 18);
+//			map.put("name", "d");
+//			User user = userMapper.queryByCond(map);
+//			System.out.println(user);
+			
+//			User user = userMapper.queryByIdAndName(18, "d");
+//			QueryUserParam queryUserParam = new QueryUserParam();
+//			queryUserParam.setId(18);
+//			queryUserParam.setName("d");
+//			User user = userMapper.queryByCondObjParam(queryUserParam);
+//			System.out.println(user);
+			
+//			List<User> list = userMapper.queryUserByName("d");
+//			System.out.println(list.get(0));
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(sqlSession != null) {

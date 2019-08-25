@@ -2,13 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.asiainfo.mapper.UserMapper"> <!-- 明明空间的值是Mapper接口类的全限定名，即MyBatis是通过读取该xml的namespace值来找到的UserMapper.class，所以mapper.xml和mapper.java的文件名可以不一致 -->
-	<select id="queryUserById" parameterType="int" resultType="User">
-		select user_id userId,user_name userName from t_user where user_id=#{id}
+<!-- 	<select id="queryUserById" parameterType="int" resultType="User" databaseId="mysql"> -->
+<!-- 		select user_id userId,user_name userName,password,user_type userType,locked,credit,last_visit lastVisit,last_ip lastIp from t_user where user_id=#{id} -->
+<!-- 	</select> -->
+	<select id="queryUserById" parameterType="int" resultType="User" databaseId="mysql">
+		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id}
 	</select>
 	
-	<insert id="saveUser" parameterType="User">
-		insert into t_user (user_name) values (#{userName})
+	<select id="queryByCond" parameterType="Map" resultType="User">
+		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id} and user_name like concat('%',#{name},'%')
+	</select>
+	
+	<select id="queryByIdAndName" resultType="User">
+		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id} and user_name like concat('%',#{name},'%')
+	</select>
+	
+	<select id="queryByCondObjParam" parameterType="QueryUserParam" resultType="User">
+		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id} and user_name like concat('%',#{name},'%')
+	</select>
+	
+	<resultMap type="User" id="queryUserByNameMap">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="password" property="password"/>
+		<result column="user_type" property="userType"/>
+		<result column="locked" property="locked"/>
+		<result column="credit" property="credit"/>
+		<result column="last_visit" property="lastVisit"/>
+		<result column="last_ip" property="lastIp"/>
+	</resultMap>
+	
+	<select id="queryUserByName" parameterType="String" resultMap="queryUserByNameMap">
+		select user_id,user_name from t_user where user_name like concat('%',#{aaa},'%')
+	</select>
+	
+	<!-- <insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId"> --> <!-- useGeneratedKeys表示使用数据库主键的生成规则，keyProperty用来标明那个列是主键，用于保存后主键回填到POJO -->
+<!-- 		insert into t_user (user_name,locked) values (#{userName},#{locked}) -->
+<!-- 	</insert> -->
+	
+	<insert id="saveUser" parameterType="User" keyProperty="userId">
+		<selectKey keyProperty="userId" resultType="int" order="BEFORE">	<!-- 使用自定义主键生成规则 -->
+			select max(user_id)+100 from t_user
+		</selectKey>
+		insert into t_user (user_id,user_name,locked) values (#{userId},#{userName},#{locked})
 	</insert>
 	
+	<update id="updateById" parameterType="User">
+		update t_user set user_name=#{userName} where user_id=#{userId}
+	</update>
 	
+	<delete id="deleteById" parameterType="int">
+		delete from t_user where user_id=#{bbb}
+	</delete>
 </mapper>
