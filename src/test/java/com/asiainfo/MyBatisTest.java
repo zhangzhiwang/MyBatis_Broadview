@@ -78,7 +78,7 @@ public class MyBatisTest {
 //			System.out.println("result=" + result);
 			
 //			int result = userMapper.updateById(u);
-			int result = userMapper.deleteById(421);
+			int result = userMapper.deleteById(3);
 			sqlSession.commit();
 			System.out.println("result=" + result);
 		} catch (Exception e) {
@@ -129,6 +129,11 @@ public class MyBatisTest {
 //			List<User> list = userMapper.queryUserByName("d");
 //			System.out.println(list.get(0));
 			
+//			User user = userMapper.dynamicCols("user_id,user_name");
+//			User user = userMapper.queryByIdSql(1);
+//			User user = userMapper.queryByIdSqlPrefix(1);
+			User user = userMapper.queryByIdRefidParam("userTable");
+			System.out.println(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

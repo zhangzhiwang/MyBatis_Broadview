@@ -17,8 +17,40 @@
 		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id} and user_name like concat('%',#{name},'%')
 	</select>
 	
+	<select id="dynamicCols" parameterType="String" resultType="User">
+		select #{cols} from t_user where user_id=1
+	</select>
+	
 	<select id="queryByCondObjParam" parameterType="QueryUserParam" resultType="User">
 		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id} and user_name like concat('%',#{name},'%')
+	</select>
+	
+	<sql id="userColumns">
+		user_id,user_name,last_ip
+	</sql>
+	<sql id="userColumnsPrefix">
+		${prefix}.user_id,${prefix}.user_name,${prefix}.last_ip
+	</sql>
+	<sql id="userTable">
+		t_user
+	</sql>
+	
+	<select id="queryByIdSql" parameterType="int" resultType="User">
+		select <include refid="userColumns"></include> from t_user where user_id=#{ccc}
+	</select>
+	<select id="queryByIdSqlPrefix" parameterType="int" resultType="User">
+		select 
+			<include refid="userColumnsPrefix">
+				<property name="prefix" value="u"/>
+			</include>
+		from t_user u where user_id=#{ccc}
+	</select>
+	<select id="queryByIdRefidParam" parameterType="String" resultType="User">
+		select 
+			<include refid="userColumns"></include>
+		from 
+			<include refid="${tableName}"></include>
+		where user_id=1
 	</select>
 	
 	<resultMap type="User" id="queryUserByNameMap">

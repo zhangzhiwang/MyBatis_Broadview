@@ -29,6 +29,14 @@ public interface UserMapper {
 	
 	User queryByCondObjParam(QueryUserParam queryUserParam);
 	
+	User dynamicCols(String cols);
+	
+	User queryByIdSql(int id);
+	
+	User queryByIdSqlPrefix(int id);
+	
+	User queryByIdRefidParam(String tableName);
+	
 	int updateById(User user);
 	
 	int deleteById(int id);
