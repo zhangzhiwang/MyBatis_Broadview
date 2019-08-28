@@ -25,6 +25,117 @@
 		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id} and user_name like concat('%',#{name},'%')
 	</select>
 	
+	<select id="queryByCond2" parameterType="User" resultType="User">
+		select
+			<include refid="userColumns"></include>
+		from
+			<include refid="userTable"></include>
+		where 1=1
+			<if test="userName != null and userName != ''">
+				and user_name like concat('%',#{userName},'%')
+			</if>
+			<if test="lastIp !=null and lastIp != ''">
+				and last_ip = #{lastIp}
+			</if>
+	</select>
+	
+	<select id="queryByCond3" parameterType="User" resultType="User">
+		select
+			<include refid="userColumns"></include>
+		from
+			<include refid="userTable"></include>
+		where 1=1
+			<choose>
+				<when test="userName != null and userName != ''">
+					and user_name like concat('%',#{userName},'%') 
+				</when>
+				<when test="lastIp !=null and lastIp != ''">
+					and last_ip = #{lastIp}
+				</when>
+				<otherwise>
+					and locked = 0
+				</otherwise>
+			</choose>
+	</select>
+	
+	<select id="queryByCond4" parameterType="User" resultType="User">
+		select
+			<include refid="userColumns"></include>
+		from
+			<include refid="userTable"></include>
+		<where>
+			<if test="userName != null and userName != ''">
+				and user_name like concat('%',#{userName},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryByCond5" parameterType="User" resultType="User">
+		select
+			<include refid="userColumns"></include>
+		from
+			<include refid="userTable"></include>
+		<trim prefix="where" prefixOverrides="and">
+			<if test="userName != null and userName != ''">
+				and user_name like concat('%',#{userName},'%')
+			</if>
+		</trim>
+	</select>
+	
+	<select id="queryByCond6" parameterType="User" resultType="User">
+		select
+			<include refid="userColumns"></include>
+		from
+			<include refid="userTable"></include>
+		where user_id in
+			<foreach collection="userIdList" item="ui" index="i" open="(" close=")" separator=",">
+				#{ui}
+			</foreach>
+	</select>
+	
+	<select id="queryByCond7" resultType="User">
+		<bind name="bind1" value="'%' + userName_p1 + '%'"/>
+		<bind name="bind2" value="'%' + lastIp_p2 + '%'"/>
+		select
+			<include refid="userColumns"></include>
+		from
+			<include refid="userTable"></include>
+		where user_name like #{bind1} and last_ip like #{bind2}
+	</select>
+	
+	<insert id="insertByCond" parameterType="User">
+		insert into t_user
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="userName != null and userName != ''">
+					user_name,
+				</if>
+				<if test="lastIp != null and lastIp != ''">
+					last_ip,
+				</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="userName != null and userName != ''">
+					#{userName},
+				</if>
+				<if test="lastIp != null and lastIp != ''">
+					#{lastIp},
+				</if>
+			</trim>			
+	</insert>
+	
+	<update id="update2" parameterType="User">
+		update t_user
+		<set>
+			<if test="userName != null and userName != ''">
+					,user_name=#{userName}
+			</if>
+			<if test="lastIp != null and lastIp != ''">
+					,last_ip=#{lastIp},
+			</if>
+		</set>
+		where user_id=#{userId}
+	</update>
+	
 	<sql id="userColumns">
 		user_id,user_name,last_ip
 	</sql>
@@ -35,7 +146,7 @@
 		t_user
 	</sql>
 	
-	<select id="queryByIdSql" parameterType="int" resultType="User">
+	<select id="queryByIdSql" parameterType="int" resultMap="queryUserByNameMap">
 		select <include refid="userColumns"></include> from t_user where user_id=#{ccc}
 	</select>
 	<select id="queryByIdSqlPrefix" parameterType="int" resultType="User">
@@ -49,16 +160,20 @@
 		select 
 			<include refid="userColumns"></include>
 		from 
-			<include refid="${tableName}"></include>
+			<include refid="userTable"></include>
 		where user_id=1
 	</select>
 	
 	<resultMap type="User" id="queryUserByNameMap">
+		<constructor>
+			<idArg column="user_id" javaType="int"/>
+			<arg column="user_name" javaType="String"/>
+		</constructor>
 		<id column="user_id" property="userId"/>
-		<result column="user_name" property="userName"/>
+		<result column="user_name" property="qup.name"/>
 		<result column="password" property="password"/>
 		<result column="user_type" property="userType"/>
-		<result column="locked" property="locked"/>
+		<result column="locked" property="locked" typeHandler="com.asiainfo.handler.MyEnumTypeHandler"/>
 		<result column="credit" property="credit"/>
 		<result column="last_visit" property="lastVisit"/>
 		<result column="last_ip" property="lastIp"/>

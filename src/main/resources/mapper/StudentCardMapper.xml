@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="">
+	<sql id="studentCardCols">
+		id,name,gender,student_card_num
+	</sql>
+	<select id="queryByStuNum" parameterType="int" resultMap="studentCardResultMap">
+		select
+			<include refid="studentCardCols"></include>
+		from t_student_card where number=#{number}	
+	</select>
+	<resultMap type="StudentCard" id="studentCardResultMap">
+		<id column="id" property="id"/>
+		<result column="number" property="number"/>
+	</resultMap>
+</mapper>

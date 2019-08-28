@@ -21,6 +21,8 @@ public interface UserMapper {
 	
 	int saveUser(User user);
 	
+	int insertByCond(User user);
+	
 	List<User> queryUserByName(String userName);
 	
 	User queryByCond(Map map);
@@ -37,7 +39,21 @@ public interface UserMapper {
 	
 	User queryByIdRefidParam(String tableName);
 	
+	List<User> queryByCond2(User user);
+	
+	List<User> queryByCond3(User user);
+	
+	List<User> queryByCond4(User user);
+	
+	List<User> queryByCond5(User user);
+	
+	List<User> queryByCond6(@Param("userIdList") List<Integer> list);
+	
+	List<User> queryByCond7(@Param("userName_p1") String str1, @Param("lastIp_p2") String str2);
+	
 	int updateById(User user);
+	
+	int update2(User user);
 	
 	int deleteById(int id);
 }

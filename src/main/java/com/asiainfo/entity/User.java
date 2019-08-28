@@ -19,9 +19,21 @@ public class User {
 	private String password;
 	private String userType;
 	private byte locked;
+//	private LockEnum locked;
 	private int credit;
 	private Timestamp lastVisit;
 	private String lastIp;
+	private QueryUserParam qup;
+
+	public User(Integer userId, String userName) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+	}
+
+	public User() {
+		super();
+	}
 
 	public int getUserId() {
 		return userId;
@@ -63,6 +75,14 @@ public class User {
 		this.locked = locked;
 	}
 
+//	public LockEnum getLocked() {
+//		return locked;
+//	}
+//
+//	public void setLocked(LockEnum locked) {
+//		this.locked = locked;
+//	}
+
 	public int getCredit() {
 		return credit;
 	}
@@ -87,8 +107,18 @@ public class User {
 		this.lastIp = lastIp;
 	}
 
+	
+	
+	public QueryUserParam getQup() {
+		return qup;
+	}
+
+	public void setQup(QueryUserParam qup) {
+		this.qup = qup;
+	}
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", userType=" + userType + ", locked=" + locked + ", credit=" + credit + ", lastVisit=" + lastVisit + ", lastIp=" + lastIp + "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", userType=" + userType + ", locked=" + locked + ", credit=" + credit + ", lastVisit=" + lastVisit + ", lastIp=" + lastIp + ", qup=" + qup + "]";
 	}
 }

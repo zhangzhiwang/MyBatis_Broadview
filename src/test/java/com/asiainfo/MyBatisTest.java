@@ -2,6 +2,7 @@ package com.asiainfo;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,9 +68,9 @@ public class MyBatisTest {
 //			User user = userMapper.queryUserById(18);
 //			System.out.println(user);
 			
-			User u = new User();
-			u.setUserId(421);
-			u.setUserName("g");
+//			User u = new User();
+//			u.setUserId(421);
+//			u.setUserName("g");
 //			u.setLocked((byte)1);
 //			System.out.println("u1=" + u);
 //			int result = userMapper.saveUser(u);
@@ -134,6 +135,61 @@ public class MyBatisTest {
 //			User user = userMapper.queryByIdSqlPrefix(1);
 			User user = userMapper.queryByIdRefidParam("userTable");
 			System.out.println(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+	
+	@Test
+	public void test5() {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = SqlSessionFactoryDecodeUtil.getSqlSession();
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			
+//			User user = new User();
+//			user.setUserName("g");
+//			user.setPassword("1");
+//			
+//			userMapper.saveUser(user);
+//			sqlSession.commit();
+			
+//			User user = userMapper.queryByIdSql(521);
+			User user = new User();
+			user.setUserName("tom");
+			List<User> list = userMapper.queryByCond5(user);
+			System.out.println(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+	
+	@Test
+	public void test6() {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = SqlSessionFactoryDecodeUtil.getSqlSession();
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			
+			User user = new User();
+			user.setUserId(624);
+			user.setUserName("h2");
+			user.setLastIp("128");
+			
+//			userMapper.insertByCond(user);
+//			userMapper.update2(user);
+//			sqlSession.commit();
+//			List<User> list = userMapper.queryByCond6(Arrays.asList(1,2));
+			List<User> list = userMapper.queryByCond7("om", "12");
+			System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
