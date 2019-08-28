@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.mapper.StuCourseMapper">
+	<select id="queryByStuId" parameterType="int" resultMap="stuCourseResultMap">
+		select
+			id,stu_id,course_id,score
+		from t_stu_course where stu_id=#{stuId}			
+	</select>
+	<resultMap type="StuCourse" id="stuCourseResultMap">
+		<id column="id" property="id"/>
+		<result column="score" property="score"/>
+		<result column="stu_id" property="stuId"/>
+		<association property="course" column="course_id" select="com.asiainfo.mapper.CourseMapper.queryByCourseId"></association>
+	</resultMap>
+</mapper>

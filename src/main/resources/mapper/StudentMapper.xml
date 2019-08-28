@@ -14,5 +14,9 @@
 		<result column="name" property="name"/>
 		<result column="gender" property="gender"/>
 		<association property="studentCard" column="id" select="com.asiainfo.mapper.StudentCardMapper.queryByStuId"></association>
+		<collection property="stuCourseList" column="id" select="com.asiainfo.mapper.StuCourseMapper.queryByStuId"></collection>
+		<discriminator javaType="byte" column="gender">
+			<case value="1" ></case>
+		</discriminator>
 	</resultMap>
 </mapper>

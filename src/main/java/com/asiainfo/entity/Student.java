@@ -1,5 +1,7 @@
 package com.asiainfo.entity;
 
+import java.util.List;
+
 /**
  * 学生实体类
  *
@@ -11,6 +13,7 @@ public class Student {
 	private String name;
 	private byte gender;
 	private StudentCard studentCard;
+	private List<StuCourse> stuCourseList;
 
 	public int getId() {
 		return id;
@@ -44,8 +47,16 @@ public class Student {
 		this.studentCard = studentCard;
 	}
 
+	public List<StuCourse> getStuCourseList() {
+		return stuCourseList;
+	}
+
+	public void setStuCourseList(List<StuCourse> stuCourseList) {
+		this.stuCourseList = stuCourseList;
+	}
+
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", gender=" + gender + ", studentCard=" + studentCard + "]";
+		return "Student [id=" + id + ", name=" + name + ", gender=" + gender + ", studentCard=" + studentCard + ", stuCourseList=" + stuCourseList + "]";
 	}
 }
