@@ -24,10 +24,9 @@
     
 	<!-- 配置别名 -->
 	<typeAliases>
-<!-- 		<typeAlias type="com.asiainfo.entity.User" alias="User"/> -->
-<!-- 		<typeAlias type="com.asiainfo.entity.QueryUserParam" alias="QueryUserParam"/> -->
-<!-- 		<typeAlias type="com.asiainfo.entity.QueryUserParam" alias="QueryUserParam"/> -->
-		<package name="com.asiainfo.entity"/>
+		<typeAlias type="com.asiainfo.entity.User" alias="User"/>
+		<typeAlias type="com.asiainfo.entity.QueryUserParam" alias="QueryUserParam"/>
+<!-- 		<package name="com.asiainfo.entity"/> -->
 	</typeAliases>
 	
 	<!-- 配置类型处理器——处理javaType和jdbcType的映射 -->
@@ -76,5 +75,8 @@
 		<!-- <package name="com.asiainfo.mapper"/> -->	<!-- 引入映射器的方式2 -->
 		<!-- <mapper class="com.asiainfo.mapper.UserMapper"/> -->	<!-- 引入映射器的方式3 -->
 		<!-- <mapper url="file:///Applications/Eclipse.app/Contents/Eclipse/workspace/MyBatis_Broadview/src/main/resources/mapper/UserMapper.xml"/> -->	<!-- 引入映射器的方式4 -->
+<!-- 		<package name="mapper"/> -->
+		<mapper resource="mapper/StudentMapper.xml"/>
+		<mapper resource="mapper/StudentCardMapper.xml"/>
 	</mappers>
 </configuration>

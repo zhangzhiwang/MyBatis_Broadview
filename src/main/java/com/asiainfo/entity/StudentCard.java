@@ -8,7 +8,8 @@ package com.asiainfo.entity;
  */
 public class StudentCard {
 	private int id;
-	private int number;
+	private String number;
+	private int stuId;
 
 	public int getId() {
 		return id;
@@ -18,16 +19,24 @@ public class StudentCard {
 		this.id = id;
 	}
 
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
+	}
+
+	public int getStuId() {
+		return stuId;
+	}
+
+	public void setStuId(int stuId) {
+		this.stuId = stuId;
 	}
 
 	@Override
 	public String toString() {
-		return "StudentCard [id=" + id + ", number=" + number + "]";
+		return "StudentCard [id=" + id + ", number=" + number + ", stuId=" + stuId + "]";
 	}
 }

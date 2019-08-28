@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="">
+<mapper namespace="com.asiainfo.mapper.StudentMapper">
 	<sql id="studentCols">
-		id,name,gender,student_card_num
+		id,name,gender
 	</sql>
-	<select id="queryByStuNum" parameterType="int" resultMap="">
+	<select id="queryByStuId" parameterType="int" resultMap="studentResultMap">
 		select
 			<include refid="studentCols"></include>
-		from t_student where 			
+		from t_student where id=#{id}			
 	</select>
+	<resultMap type="com.asiainfo.entity.Student" id="studentResultMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="gender" property="gender"/>
+		<association property="studentCard" column="id" select="com.asiainfo.mapper.StudentCardMapper.queryByStuId"></association>
+	</resultMap>
 </mapper>

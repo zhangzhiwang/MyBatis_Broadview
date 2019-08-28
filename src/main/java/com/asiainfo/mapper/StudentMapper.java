@@ -1,5 +1,6 @@
 package com.asiainfo.mapper;
 
+import com.asiainfo.entity.Student;
 import com.asiainfo.entity.StudentCard;
 
 /**
@@ -8,14 +9,13 @@ import com.asiainfo.entity.StudentCard;
  * @author zhangzhiwang
  * @date Aug 26, 2019 9:25:56 PM
  */
-public interface StudentCardMapper {
+public interface StudentMapper {
 	/**
-	 * 通过学生证好查询学生
+	 * 通过id查询学生
 	 * 
-	 * @param stuNum
 	 * @return
 	 * @author zhangzhiwang
-	 * @date Aug 26, 2019 9:26:57 PM
+	 * @date Aug 28, 2019 1:20:26 PM
 	 */
-	StudentCard queryByStuId(int stuId);
+	Student queryByStuId(int id);
 }

@@ -14,8 +14,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import com.asiainfo.entity.QueryUserParam;
+import com.asiainfo.entity.Student;
 import com.asiainfo.entity.User;
 import com.asiainfo.enums.LockEnum;
+import com.asiainfo.mapper.StudentMapper;
 import com.asiainfo.mapper.UserMapper;
 import com.asiainfo.util.SqlSessionFactoryDecodeUtil;
 import com.asiainfo.util.SqlSessionFactoryUtil;
@@ -190,6 +192,23 @@ public class MyBatisTest {
 //			List<User> list = userMapper.queryByCond6(Arrays.asList(1,2));
 			List<User> list = userMapper.queryByCond7("om", "12");
 			System.out.println(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+	
+	@Test
+	public void test7() {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = SqlSessionFactoryDecodeUtil.getSqlSession();
+			StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+			Student student = studentMapper.queryByStuId(1);
+			System.out.println(student);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
