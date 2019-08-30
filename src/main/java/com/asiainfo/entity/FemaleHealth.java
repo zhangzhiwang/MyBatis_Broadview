@@ -1,7 +1,7 @@
 package com.asiainfo.entity;
 
 /**
- * 男性体检表实体类
+ * 女性体检表实体类
  *
  * @author zhangzhiwang
  * @date Aug 28, 2019 8:43:39 PM
@@ -9,7 +9,7 @@ package com.asiainfo.entity;
 public class FemaleHealth {
 	private int id;
 	private int stuId;
-	private String maleHealth;
+	private String femaleHealth;
 
 	public int getId() {
 		return id;
@@ -27,17 +27,17 @@ public class FemaleHealth {
 		this.stuId = stuId;
 	}
 
-	public String getMaleHealth() {
-		return maleHealth;
+	public String getFemaleHealth() {
+		return femaleHealth;
 	}
 
-	public void setMaleHealth(String maleHealth) {
-		this.maleHealth = maleHealth;
+	public void setFemaleHealth(String femaleHealth) {
+		this.femaleHealth = femaleHealth;
 	}
 
 	@Override
 	public String toString() {
-		return "MaleHealth [id=" + id + ", stuId=" + stuId + ", maleHealth=" + maleHealth + "]";
+		return "FemaleHealth [id=" + id + ", stuId=" + stuId + ", femaleHealth=" + femaleHealth + "]";
 	}
 
 }

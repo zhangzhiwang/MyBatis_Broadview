@@ -20,6 +20,8 @@
 <!--         <setting name="autoMappingBehavior" value="NONE"/> -->
 		<!-- 下划线自动转为驼峰命名 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="lazyLoadingEnabled" value="true"/>	<!-- 默认值为false -->
+		<setting name="cacheEnabled" value="true"/>
     </settings>
     
 	<!-- 配置别名 -->
@@ -82,5 +84,7 @@
 		<mapper resource="mapper/StudentCardMapper.xml"/>
 		<mapper resource="mapper/CourseMapper.xml"/>
 		<mapper resource="mapper/StuCourseMapper.xml"/>
+		<mapper resource="mapper/MaleHealthMapper.xml"/>
+		<mapper resource="mapper/FemaleHealthMapper.xml"/>
 	</mappers>
 </configuration>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.asiainfo.mapper.StudentMapper">
+	<!-- 开启MaBatis二级缓存 -->
+	<cache />
 	<sql id="studentCols">
 		id,name,gender
 	</sql>
@@ -13,10 +15,20 @@
 		<id column="id" property="id"/>
 		<result column="name" property="name"/>
 		<result column="gender" property="gender"/>
-		<association property="studentCard" column="id" select="com.asiainfo.mapper.StudentCardMapper.queryByStuId"></association>
-		<collection property="stuCourseList" column="id" select="com.asiainfo.mapper.StuCourseMapper.queryByStuId"></collection>
+		<association property="studentCard" column="id" select="com.asiainfo.mapper.StudentCardMapper.queryByStuId" fetchType="lazy"></association>
+		<collection property="stuCourseList" column="id" select="com.asiainfo.mapper.StuCourseMapper.queryByStuId" fetchType="lazy"></collection>
 		<discriminator javaType="byte" column="gender">
-			<case value="1" ></case>
+			<case value="1" resultMap="maleStudentResultMap"></case>
+			<case value="2" resultMap="femaleStudentResultMap"></case>
 		</discriminator>
 	</resultMap>
+	
+	<resultMap type="com.asiainfo.entity.MaleStudent" id="maleStudentResultMap" extends="studentResultMap">
+		<collection property="maleHealthList" column="id" select="com.asiainfo.mapper.MaleHealthMapper.queryByStuId"></collection>
+	</resultMap>
+	<resultMap type="com.asiainfo.entity.FemaleStudent" id="femaleStudentResultMap" extends="studentResultMap">
+		<collection property="femaleHealthList" column="id" select="com.asiainfo.mapper.FemaleHealthMapper.queryByStuId"></collection>
+	</resultMap>
+	
+	
 </mapper>

@@ -13,8 +13,11 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
+import com.asiainfo.entity.Course;
 import com.asiainfo.entity.QueryUserParam;
+import com.asiainfo.entity.StuCourse;
 import com.asiainfo.entity.Student;
+import com.asiainfo.entity.StudentCard;
 import com.asiainfo.entity.User;
 import com.asiainfo.enums.LockEnum;
 import com.asiainfo.mapper.StudentMapper;
@@ -116,11 +119,11 @@ public class MyBatisTest {
 		try {
 			sqlSession = SqlSessionFactoryDecodeUtil.getSqlSession();
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-//			Map map = new HashMap();
-//			map.put("id", 18);
-//			map.put("name", "d");
-//			User user = userMapper.queryByCond(map);
-//			System.out.println(user);
+			Map map = new HashMap();
+			map.put("id", 18);
+			map.put("name", "d");
+			User user = userMapper.queryByCond(map);
+			System.out.println(user);
 			
 //			User user = userMapper.queryByIdAndName(18, "d");
 //			QueryUserParam queryUserParam = new QueryUserParam();
@@ -135,8 +138,8 @@ public class MyBatisTest {
 //			User user = userMapper.dynamicCols("user_id,user_name");
 //			User user = userMapper.queryByIdSql(1);
 //			User user = userMapper.queryByIdSqlPrefix(1);
-			User user = userMapper.queryByIdRefidParam("userTable");
-			System.out.println(user);
+//			User user = userMapper.queryByIdRefidParam("userTable");
+//			System.out.println(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -207,8 +210,30 @@ public class MyBatisTest {
 		try {
 			sqlSession = SqlSessionFactoryDecodeUtil.getSqlSession();
 			StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+			System.out.println("开始查询...");
 			Student student = studentMapper.queryByStuId(1);
-			System.out.println(student);
+//			System.out.println(student);
+			System.out.println("开始第二次查询...");
+			Student student2 = studentMapper.queryByStuId(1);
+//			System.out.println(student2);
+			System.out.println("开始第三次查询...");
+			SqlSession sqlSession2 = SqlSessionFactoryDecodeUtil.getSqlSession();
+			StudentMapper studentMapper2 = sqlSession2.getMapper(StudentMapper.class);
+			Student student3 = studentMapper2.queryByStuId(1);
+//			System.out.println(student3);
+			
+//			System.out.println("-----------------------");
+//			Thread.sleep(2000);
+//			
+//			List<StuCourse> stuCourseList = student.getStuCourseList();
+//			System.out.println("-----------------------");
+//			Thread.sleep(2000);
+//			
+//			Course course = stuCourseList.get(0).getCourse();
+//			System.out.println("-----------------------");
+//			Thread.sleep(2000);
+//			
+//			StudentCard studentCard = student.getStudentCard();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

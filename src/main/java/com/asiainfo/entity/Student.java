@@ -1,5 +1,6 @@
 package com.asiainfo.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @author zhangzhiwang
  * @date Aug 26, 2019 8:51:24 PM
  */
-public class Student {
+public class Student implements Serializable {
 	private int id;
 	private String name;
 	private byte gender;

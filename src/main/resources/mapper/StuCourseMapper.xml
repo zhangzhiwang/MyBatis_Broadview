@@ -10,6 +10,6 @@
 		<id column="id" property="id"/>
 		<result column="score" property="score"/>
 		<result column="stu_id" property="stuId"/>
-		<association property="course" column="course_id" select="com.asiainfo.mapper.CourseMapper.queryByCourseId"></association>
+		<association property="course" column="course_id" select="com.asiainfo.mapper.CourseMapper.queryByCourseId" fetchType="lazy"></association>
 	</resultMap>
 </mapper>
