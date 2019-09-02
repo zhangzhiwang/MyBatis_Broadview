@@ -1,5 +1,6 @@
 package com.asiainfo.mapper;
 
+import com.asiainfo.entity.ProcedureParam;
 import com.asiainfo.entity.Student;
 import com.asiainfo.entity.StudentCard;
 
@@ -18,4 +19,6 @@ public interface StudentMapper {
 	 * @date Aug 28, 2019 1:20:26 PM
 	 */
 	Student queryByStuId(int id);
+	
+	void callProcedure(ProcedureParam procedureParam);
 }

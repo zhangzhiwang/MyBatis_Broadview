@@ -1,28 +1,29 @@
 package com.asiainfo.enums;
 
 public enum LockEnum {
-	LOCKED("100"), UNLOCKED("200"), UNKNOWN("300");
+	LOCKED(10), UNLOCKED(20), UNKNOWN(30);
 
-	private String code;
+	private int code;
 
-	private LockEnum(String code) {
+
+	private LockEnum(int code) {
 		this.code = code;
 	}
 
-	private LockEnum() {
-	}
 
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+
+	public void setCode(int code) {
 		this.code = code;
 	}
 
-	public static LockEnum getByCode(String code) {
+
+	public static LockEnum getByCode(int code) {
 		for (LockEnum lockEnum : LockEnum.values()) {
-			if (lockEnum.getCode().equals(code)) {
+			if (lockEnum.getCode() == code) {
 				return lockEnum;
 			}
 		}

@@ -20,8 +20,10 @@
 <!--         <setting name="autoMappingBehavior" value="NONE"/> -->
 		<!-- 下划线自动转为驼峰命名 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- 批量执行器（用于批量更新） -->
+		<setting name="defaultExecutorType" value="BATCH"/>
 		<setting name="lazyLoadingEnabled" value="true"/>	<!-- 默认值为false -->
-		<setting name="cacheEnabled" value="true"/>
+		<setting name="cacheEnabled" value="false"/>
     </settings>
     
 	<!-- 配置别名 -->
@@ -37,7 +39,7 @@
 	<typeHandlers>
 <!-- 		<typeHandler handler="com.asiainfo.handler.MyStringTypeHandler" javaType="String" jdbcType="VARCHAR"/> -->
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.asiainfo.enums.LockEnum"/>
-<!-- 		<typeHandler handler="com.asiainfo.handler.MyEnumTypeHandler" javaType="com.asiainfo.enums.LockEnum" jdbcType="VARCHAR"/> -->
+<!-- 		<typeHandler handler="com.asiainfo.handler.MyEnumTypeHandler" javaType="com.asiainfo.enums.LockEnum" jdbcType="INTEGER"/> -->
 <!-- 		<package name="com.asiainfo.handler"/> -->
 	</typeHandlers>
 	
@@ -84,6 +86,7 @@
 		<mapper resource="mapper/StudentCardMapper.xml"/>
 		<mapper resource="mapper/CourseMapper.xml"/>
 		<mapper resource="mapper/StuCourseMapper.xml"/>
+		<mapper resource="mapper/TFileMapper.xml"/>
 		<mapper resource="mapper/MaleHealthMapper.xml"/>
 		<mapper resource="mapper/FemaleHealthMapper.xml"/>
 	</mappers>

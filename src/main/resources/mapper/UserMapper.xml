@@ -5,7 +5,10 @@
 <!-- 	<select id="queryUserById" parameterType="int" resultType="User" databaseId="mysql"> -->
 <!-- 		select user_id userId,user_name userName,password,user_type userType,locked,credit,last_visit lastVisit,last_ip lastIp from t_user where user_id=#{id} -->
 <!-- 	</select> -->
-	<select id="queryUserById" parameterType="int" resultType="User" databaseId="mysql">
+<!-- 	<select id="queryUserById" parameterType="int" resultType="User" databaseId="mysql"> -->
+<!-- 		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id} -->
+<!-- 	</select> -->
+	<select id="queryUserById" parameterType="int" resultMap="queryUserByNameMap" databaseId="mysql">
 		select user_id,user_name,password,user_type,locked,credit,last_visit,last_ip from t_user where user_id=#{id}
 	</select>
 	
@@ -191,7 +194,7 @@
 		<selectKey keyProperty="userId" resultType="int" order="BEFORE">	<!-- 使用自定义主键生成规则 -->
 			select max(user_id)+100 from t_user
 		</selectKey>
-		insert into t_user (user_id,user_name,locked) values (#{userId},#{userName},#{locked})
+		insert into t_user (user_id,user_name,locked) values (#{userId},#{userName},#{locked, typeHandler=com.asiainfo.handler.MyEnumTypeHandler})
 	</insert>
 	
 	<update id="updateById" parameterType="User">

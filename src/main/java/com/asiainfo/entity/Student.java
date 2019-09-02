@@ -10,6 +10,8 @@ import java.util.List;
  * @date Aug 26, 2019 8:51:24 PM
  */
 public class Student implements Serializable {
+	/***/
+	private static final long serialVersionUID = 6368996397280062044L;
 	private int id;
 	private String name;
 	private byte gender;

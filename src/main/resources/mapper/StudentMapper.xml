@@ -2,15 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.asiainfo.mapper.StudentMapper">
 	<!-- 开启MaBatis二级缓存 -->
-	<cache />
+<!-- 	<cache /> -->
 	<sql id="studentCols">
 		id,name,gender
 	</sql>
-	<select id="queryByStuId" parameterType="int" resultMap="studentResultMap">
+	<select id="queryByStuId" parameterType="int" resultType="com.asiainfo.entity.Student">
 		select
 			<include refid="studentCols"></include>
 		from t_student where id=#{id}			
 	</select>
+<!-- 	<select id="queryByStuId" parameterType="int" resultMap="studentResultMap"> -->
+<!-- 		select -->
+<!-- 			<include refid="studentCols"></include> -->
+<!-- 		from t_student where id=#{id}			 -->
+<!-- 	</select> -->
 	<resultMap type="com.asiainfo.entity.Student" id="studentResultMap">
 		<id column="id" property="id"/>
 		<result column="name" property="name"/>
@@ -30,5 +35,7 @@
 		<collection property="femaleHealthList" column="id" select="com.asiainfo.mapper.FemaleHealthMapper.queryByStuId"></collection>
 	</resultMap>
 	
-	
+	<select id="callProcedure" parameterType="com.asiainfo.entity.ProcedureParam" statementType="CALLABLE">
+		{call procedure_test(#{pName, mode=IN, jdbcType=VARCHAR},#{result, mode=OUT,jdbcType=INTEGER},#{now, mode=OUT, jdbcType=TIMESTAMP})}
+	</select>
 </mapper>

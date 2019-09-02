@@ -18,8 +18,8 @@ public class User {
 	private String userName;
 	private String password;
 	private String userType;
-	private byte locked;
-//	private LockEnum locked;
+//	private byte locked;
+	private LockEnum locked;
 	private int credit;
 	private Timestamp lastVisit;
 	private String lastIp;
@@ -67,21 +67,21 @@ public class User {
 		this.userType = userType;
 	}
 
-	public byte getLocked() {
-		return locked;
-	}
-
-	public void setLocked(byte locked) {
-		this.locked = locked;
-	}
-
-//	public LockEnum getLocked() {
+//	public byte getLocked() {
 //		return locked;
 //	}
 //
-//	public void setLocked(LockEnum locked) {
+//	public void setLocked(byte locked) {
 //		this.locked = locked;
 //	}
+
+	public LockEnum getLocked() {
+		return locked;
+	}
+
+	public void setLocked(LockEnum locked) {
+		this.locked = locked;
+	}
 
 	public int getCredit() {
 		return credit;

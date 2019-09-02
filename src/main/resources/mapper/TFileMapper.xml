@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.asiainfo.mapper.TFileMapper">
+	<!-- <insert id="save" parameterType="com.asiainfo.entity.TFile" useGeneratedKeys="true" keyProperty="id"> -->	<!-- useGeneratedKeys为使用数据库的序列，keyProperty指明哪个属性是主键，而且具有主键回填的功能 -->
+<!-- 		insert into t_file (file) values (#{fileBytes}) -->
+<!-- 	</insert> -->
+
+	<insert id="save" parameterType="com.asiainfo.entity.TFile">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">	<!-- 也有回填功能 -->
+			select if(max(id) is null,1,max(id) + 100) as newId from t_file
+		</selectKey>
+		insert into t_file (id,file) values (#{id},#{fileBytes})
+	</insert>
+	
+	<select id="queryById" parameterType="int" resultType="com.asiainfo.entity.TFile">
+		select id,file fileBytes from t_file where id=#{id}
+	</select>
+	
+	<select id="queryByYear" resultType="com.asiainfo.entity.TFile">
+		select id,file fileBytes from t_file_${year} where id=#{id} 
+	</select>
+	
+	<select id="queryByYearWithPage" resultType="com.asiainfo.entity.TFile">
+		select id,file fileBytes from t_file_${year}
+	</select>
+</mapper>
