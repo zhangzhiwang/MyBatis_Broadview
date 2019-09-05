@@ -21,9 +21,9 @@
 		<!-- 下划线自动转为驼峰命名 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		<!-- 批量执行器（用于批量更新） -->
-		<setting name="defaultExecutorType" value="BATCH"/>
+<!-- 		<setting name="defaultExecutorType" value="BATCH"/> -->
 		<setting name="lazyLoadingEnabled" value="true"/>	<!-- 默认值为false -->
-		<setting name="cacheEnabled" value="false"/>
+		<setting name="cacheEnabled" value="true"/>
     </settings>
     
 	<!-- 配置别名 -->
